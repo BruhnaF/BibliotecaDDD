@@ -8,12 +8,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8CE05CAE-E1F4-4109-9D57-A4D669723E66}</ProjectGuid>
+    <ProjectGuid>{205B6271-C2EE-42EC-B15C-05F5CFC647C0}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BibliotecaDDD.Presentation.UIMVC</RootNamespace>
-    <AssemblyName>BibliotecaDDD.Presentation.UIMVC</AssemblyName>
+    <RootNamespace>BibliotecaDDD.Presentation.WebApi</RootNamespace>
+    <AssemblyName>BibliotecaDDD.Presentation.WebApi</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -48,6 +48,13 @@
       <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SimpleInjector, Version=4.0.12.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.4.0.12\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.WebApi, Version=4.0.12.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.Integration.WebApi.4.0.12\lib\net45\SimpleInjector.Integration.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -66,43 +73,56 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Web.Razor">
-      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Webpages">
-      <HintPath>..\..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Webpages.Deployment">
-      <HintPath>..\..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Webpages.Razor">
-      <HintPath>..\..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Helpers">
-      <HintPath>..\..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure">
-      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc">
-      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="src\css\base\fontawesome-all.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\carregando.gif" />
+    <Content Include="img\editar.png" />
+    <Content Include="img\excluir.jpg" />
+    <Content Include="src\css\base\bootstrap.min.css" />
+    <Content Include="src\css\base\fontawesome.css" />
+    <Content Include="src\pages\idioma\Cadastrar.html" />
+    <Content Include="src\pages\idioma\Editar.html" />
+    <Content Include="src\pages\idioma\Index.html" />
+    <Content Include="src\pages\Index.html" />
+    <Content Include="src\scripts\base\bootstrap.min.js" />
+    <Content Include="src\scripts\base\jquery-3.3.1.min.js" />
+    <Content Include="src\scripts\base\jquery.blockUI.js" />
     <Content Include="Web.config" />
+    <Content Include="src\css\webfonts\fa-brands-400.svg" />
+    <Content Include="src\css\webfonts\fa-regular-400.svg" />
+    <Content Include="src\css\webfonts\fa-solid-900.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\IdiomaController.cs" />
+    <Compile Include="App_Start\SimpleInjectorConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\IdiomaWebController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\JsonContent.cs" />
     <Compile Include="ViewModels\IdiomaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -110,15 +130,30 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="src\css\webfonts\fa-brands-400.eot" />
+    <Content Include="src\css\webfonts\fa-brands-400.ttf" />
+    <Content Include="src\css\webfonts\fa-brands-400.woff" />
+    <Content Include="src\css\webfonts\fa-brands-400.woff2" />
+    <Content Include="src\css\webfonts\fa-regular-400.eot" />
+    <Content Include="src\css\webfonts\fa-regular-400.ttf" />
+    <Content Include="src\css\webfonts\fa-regular-400.woff" />
+    <Content Include="src\css\webfonts\fa-regular-400.woff2" />
+    <Content Include="src\css\webfonts\fa-solid-900.eot" />
+    <Content Include="src\css\webfonts\fa-solid-900.ttf" />
+    <Content Include="src\css\webfonts\fa-solid-900.woff" />
+    <Content Include="src\css\webfonts\fa-solid-900.woff2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Idioma\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BibliotecaDDD.Domain\BibliotecaDDD.Domain.csproj">
       <Project>{A8075E17-4691-4324-8D80-59EC17464B57}</Project>
       <Name>BibliotecaDDD.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BibliotecaDDD.Infra.CrossCutting.IoC\BibliotecaDDD.Infra.CrossCutting.IoC.csproj">
+      <Project>{BBD5A917-B0FB-4B49-82DD-62CE679474F2}</Project>
+      <Name>BibliotecaDDD.Infra.CrossCutting.IoC</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
@@ -134,9 +169,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50098</DevelopmentServerPort>
+          <DevelopmentServerPort>50680</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50098/</IISUrl>
+          <IISUrl>http://localhost:50617/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

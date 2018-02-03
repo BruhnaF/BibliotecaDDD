@@ -40,7 +40,7 @@ namespace BibliotecaDDD.Infra.Data.Entity.Repositories
         /// Remove objeto do Contexto. 
         /// </summary>
         /// <param name="id">Id do Objeto a ser Removido.</param>
-        public void Delete(int id)
+        public void Delete(object[] id)
         {
             _dbSet.Remove(Get(id));
         }
@@ -60,7 +60,7 @@ namespace BibliotecaDDD.Infra.Data.Entity.Repositories
         /// </summary>
         /// <param name="id">Id a ser encontrada.</param>
         /// <returns></returns>
-        public TEntity Get(int id)
+        public TEntity Get(object[] id)
         {
            return _dbSet.Find(id);
         }
@@ -88,6 +88,10 @@ namespace BibliotecaDDD.Infra.Data.Entity.Repositories
             _context.SaveChanges();
         }
 
+        /// <summary>
+        /// Altera o contexto.
+        /// </summary>
+        /// <param name="obj"></param>
         public void Update(TEntity obj)
         {
             _context.Entry(obj).State = EntityState.Modified;

@@ -30,10 +30,37 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=4.0.12.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.4.0.12\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web, Version=4.0.12.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.Integration.Web.4.0.12\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IoCModulo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BibliotecaDDD.Aplication\BibliotecaDDD.Application.csproj">
+      <Project>{D9D40774-D4B5-4FDB-AB03-8D739B17D5BD}</Project>
+      <Name>BibliotecaDDD.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BibliotecaDDD.Domain\BibliotecaDDD.Domain.csproj">
+      <Project>{A8075E17-4691-4324-8D80-59EC17464B57}</Project>
+      <Name>BibliotecaDDD.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BibliotecaDDD.Infra.Data.Entity\BibliotecaDDD.Infra.Data.Entity.csproj">
+      <Project>{195894BA-E3BB-4332-9D81-A518C19F3952}</Project>
+      <Name>BibliotecaDDD.Infra.Data.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

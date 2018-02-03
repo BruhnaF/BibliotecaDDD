@@ -33,13 +33,14 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\Application\IdiomaAppContrato.cs" />
+    <Compile Include="Contracts\Repository\IdiomaRepositoryContract.cs" />
     <Compile Include="Contracts\Repository\RepositoryBaseContract.cs" />
+    <Compile Include="Entities\Idioma.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Contracts\Application\" />
     <Folder Include="Contracts\Service\" />
-    <Folder Include="Entities\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

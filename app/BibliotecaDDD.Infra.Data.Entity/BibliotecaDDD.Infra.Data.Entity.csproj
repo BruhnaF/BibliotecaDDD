@@ -41,12 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\BibliotecaDDDContext.cs" />
+    <Compile Include="EntityMap\IdiomaMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IdiomaRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EntityMap\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\BibliotecaDDD.Domain\BibliotecaDDD.Domain.csproj">
       <Project>{A8075E17-4691-4324-8D80-59EC17464B57}</Project>

@@ -26,14 +26,14 @@ namespace BibliotecaDDD.Domain.Contracts.Repository
         /// Metodo para Excluir um Objeto pela Id.
         /// </summary>
         /// <param name="id">Id do Objeto a ser Excluido.</param>
-        void Delete(int id);
+        void Delete(object[] id);
 
         /// <summary>
         /// Metodo de Busca de Objeto por Id.
         /// </summary>
         /// <param name="id">Id a ser Encontrado.</param>
         /// <returns></returns>
-        TEntity Get(int id);
+        TEntity Get(object[] id);
        
         /// <summary>
         /// Busca por Objeto no Sistema.

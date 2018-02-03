@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Cadastrar Idioma - Biblioteca</title>
+    <link href="../../css/base/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../css/base/fontawesome-all.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">     
+        <nav class=" navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="../Index.html">Biblioteca</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Idioma
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="active">
+                                <a href="Cadastrar.html">Cadastrar</a>
+                            </li>
+                            <li>
+                                <a href="Index.html">Buscar</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Outro</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <ol class="breadcrumb">
+            <li><a href="../Index.html">Home</a></li>
+            <li><a href="Index.html">Idioma</a></li>
+            <li class="active">Cadastrar</li>
+        </ol>
+        <div class="container-fluid">
+            <div class="row">
+                <h2>Cadastrar</h2>
+            </div>
+            <form>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="txtIdiomaId">Código do Idioma</label>
+                        <input type="text" class="form-control" id="txtIdiomaId" placeholder="Código do Idioma" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="txtNome">Nome</label>
+                        <input type="text" class="form-control" id="txtNome" placeholder="Nome" />
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-danger" id="btnCancelar">Cancelar</button>
+                    <button type="button" class="btn btn-default" id="btnLimpar">Limpar</button>
+                    <button type="button" class="btn btn-primary" id="btnSalvar">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalResultado" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="modalResultadoTitle"></h4>
+                </div>
+                <div class="modal-body">
+                    <p id="modalResultadoMessagem"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../../scripts/base/jquery-3.3.1.min.js"></script>
+    <script src="../../scripts/base/bootstrap.min.js"></script>
+
+    <script>
+        var _botaoCancelar = $("#btnCancelar");
+        var _botaoLimpar = $("#btnLimpar");
+        var _botaoSalvar = $("#btnSalvar");
+        var _txtIdiomaId = $("#txtIdiomaId");
+        var _txtNome = $("#txtNome");
+
+        var _modalTitulo = $("#modalResultadoTitle");
+        var _modalMensagem = $("#modalResultadoMessagem"); 
+        var _modal = $("#modalResultado");
+
+        var urlApi = "http://localhost:50617/api/IdiomaWeb";
+
+        _botaoCancelar.on("click", CancelarCadastro);
+        _botaoLimpar.on("click", LimparCampos);
+        _botaoSalvar.on("click", SalvarDados);
+
+        function CancelarCadastro() {
+            window.location.href = "../Index.html";
+        }
+
+        function LimparCampos() {
+            _txtIdiomaId.val('');
+            _txtNome.val('');
+        }
+
+        function SalvarDados() {
+            var dados = PegarDadosdoForm();
+
+            $.ajax({
+                url: urlApi,
+                type: "POST",
+                cache: false, 
+                data: JSON.stringify(dados),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            })
+                .done(function (response) {
+                    var titulo = "";
+
+                    if (response.sucesso) {
+
+                        titulo = "Sucesso";
+                        LimparCampos();
+                    } else {
+                        titulo = "Aviso";
+                    }   
+
+                    _modalTitulo.text(titulo + " - Biblioteca");
+                    _modalMensagem.text(response.dados);
+                    _modal.modal('show');
+                })
+                .fail(function (response) {
+                    _modalTitulo.text("Erro - Biblioteca");
+                    _modalMensagem.text(response.responseText);
+                    _modal.modal('show');
+                });
+        }
+
+        function PegarDadosdoForm() {
+            var dados = { "IdiomaId": _txtIdiomaId.val(), "Nome": _txtNome.val() };
+            return dados;
+        }
+
+    </script>
+</body>
+</html>

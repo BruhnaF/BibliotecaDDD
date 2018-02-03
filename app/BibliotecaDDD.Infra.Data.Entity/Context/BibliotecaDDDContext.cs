@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using BibliotecaDDD.Infra.Data.Entity.EntityMap;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace BibliotecaDDD.Infra.Data.Entity.Context
@@ -14,7 +15,7 @@ namespace BibliotecaDDD.Infra.Data.Entity.Context
         /// </summary>
         public BibliotecaDDDContext() : base("BibliotecaDDDConection")
         {
-            
+            var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;      
         }
 
         /// <summary>
@@ -26,6 +27,8 @@ namespace BibliotecaDDD.Infra.Data.Entity.Context
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+
+            modelBuilder.Configurations.Add(new IdiomaMap());
         }
     }
 }

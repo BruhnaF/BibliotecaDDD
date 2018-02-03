@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Lista de Idiomas - Biblioteca</title>
+    <link href="../../css/base/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../css/base/fontawesome-all.css" rel="stylesheet" />
+    <link href="../../css/base/fontawesome.css" rel="stylesheet" />
+</head>
+<body>
+    <style>
+        .aligncenter {
+            text-align: center;
+        }
+
+        .colunaCodigoIdioma {
+            width: 30%;
+        }
+
+        .img {
+            width: 1%;
+        }
+    </style>
+    <div class="container">
+        <nav class=" navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="../Index.html">Biblioteca</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Idioma
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="Cadastrar.html">Cadastrar</a>
+                            </li>
+                            <li class="active">
+                                <a href="Index.html">Buscar</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Outro</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <ol class="breadcrumb">
+            <li><a href="../Index.html">Home</a></li>
+            <li>Idioma</li>
+            <li class="active">Buscar</li>
+        </ol>
+        <div class="container-fluid">
+            <div class="row">
+                <h2>Buscar</h2>
+            </div>
+            <div class="row">
+                <table class="table table-striped table-bordered" id="tabelaIdiomas">
+                    <thead>
+                        <tr>
+                            <th class="colunaCodigoIdioma">Código do Idioma</th>
+                            <th>Nome</th>
+                            <th class="img">Editar</th>
+                            <th class="img">Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dadosTabelaIdioma"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="modalResultado" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="modalResultadoTitle"></h4>
+                </div>
+                <div class="modal-body">
+                    <p id="modalResultadoMessagem"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalExcluir" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="modalExcluir">Confirma Excluir - Biblioteca</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="modalExcluirMessagem">Deseja Excluir</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="btnConfirmaExcluir">Sim</button>
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="../../scripts/base/jquery-3.3.1.min.js"></script>
+    <script src="../../scripts/base/bootstrap.min.js"></script>
+    <script src="../../scripts/base/jquery.blockUI.js"></script>
+    <script>
+
+        var _modalTitulo = $("#modalResultadoTitle");
+        var _modalExcluir = $("#modalExcluir");
+        var _modalMensagem = $("#modalResultadoMessagem");
+        var _modalExcluirMessagem = $("#modalExcluirMessagem");
+        var _modal = $("#modalResultado");
+        var _dadosTabelaIdioma = $("#dadosTabelaIdioma");
+        var _btnConfirmaExcluir = $("#btnConfirmaExcluir");
+        var codigoIdioma = "";
+
+        var imgEditar = '<td><button type="button" class="btn btn-primary btnEditar"><span class="fa fa-pencil-alt"></span></button></td>';
+        var imgExcluir = '<td><button type = "button" class = "btn btn-danger btnExcluir"><span class="fas fa-trash-alt"></span></button></td>';
+
+        var urlApi = "http://localhost:50617/api/IdiomaWeb";
+
+        
+
+        $(document).ready(InicializarPagina);
+
+        function AdicionarLinhaRegistro(registro) {
+            var novaLinha = $("<tr>");
+            var novaCelulaCodigoIdioma = $("<td>");
+            var novaCelulaNomeIdioma = $("<td>");
+            var novaCelulaImgEditar = $("<td>");
+            var novaCelulaImgExcluir = $("<td>");
+
+            novaCelulaCodigoIdioma.text(registro.IdiomaId);
+            novaCelulaCodigoIdioma.prop("class", "celulaCodigoIdioma");
+            novaCelulaNomeIdioma.text(registro.Nome);
+            novaCelulaImgEditar = imgEditar;
+            novaCelulaImgExcluir = imgExcluir;
+
+            novaLinha.append(novaCelulaCodigoIdioma);
+            novaLinha.append(novaCelulaNomeIdioma);
+            novaLinha.append(novaCelulaImgEditar);
+            novaLinha.append(novaCelulaImgExcluir);
+
+            _dadosTabelaIdioma.append(novaLinha);
+        }
+
+        function AdicionarLinhaSemRegistros() {
+            var novaCelula = $("<td>")
+            novaCelula.text("Nenhum Registro Encontrado");
+            novaCelula.prop("class", "aligncenter");
+            novaCelula.prop("colspan", "2");
+
+            var novaLinha = $("<tr>");
+            novaLinha.append(novaCelula);
+
+            _dadosTabelaIdioma.append(novaLinha);
+        }
+
+        function BloquearTela() {
+            $.blockUI({ message: '<h1><img src="../../../img/carregando.gif"/></h1>' });
+        }
+
+        function DesbloquearTela() {
+            $.unblockUI();
+        }
+
+        function ConfirmaExcluir() {
+            $.ajax({
+                url: urlApi + "/" + codigoIdioma,
+                type: "DELETE",
+                cache: false,
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            })
+                .done(function (response) {                   
+                    var titulo = "";
+
+                    if (response.sucesso) {
+
+                        titulo = "Sucesso";                       
+                    } else {
+                        titulo = "Aviso";
+                    }
+
+                    _dadosTabelaIdioma.empty();
+                    InicializarTabela();
+                    _modalExcluir.modal("hide");
+                    _modalTitulo.text(titulo + " - Biblioteca");
+                    _modalMensagem.text(response.dados);
+                    _modal.modal('show');
+                })
+
+                .fail(function (response) {
+                    _modalTitulo.text("Erro - Biblioteca");
+                    _modalMensagem.text(response.responseText);
+                    _modal.modal('show');
+                });
+        }
+
+
+        function ExcluirIdioma(e) {
+            _modalExcluir.modal('show');
+            e.preventDefault;
+            codigoIdioma = $(this).closest('tr').find('td.celulaCodigoIdioma').text();
+        }
+
+        function InicializarPagina() {
+            BloquearTela();
+            InicializarTabela();
+
+            $(document).on('click', '.btnEditar', IrParaEditarIdioma);
+            $(document).on('click', '.btnExcluir', ExcluirIdioma);
+            _btnConfirmaExcluir.on("click", ConfirmaExcluir);
+
+        }
+
+        function InicializarTabela() {
+            $.ajax({
+                url: urlApi,
+                type: "GET",
+                cache: false,
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            })
+                .done(function (response) {
+
+                    if (response.sucesso) {
+
+                        if (response.dados.length > 0) {
+                            var listaIdiomas = response.dados;
+
+                            for (var i = 0; i < listaIdiomas.length; i++) {
+                                AdicionarLinhaRegistro(listaIdiomas[i]);
+                            }
+                        }
+                        else {
+                            AdicionarLinhaSemRegistros();
+                        }
+
+                    } else {
+
+                        _modalTitulo.text("Aviso - Biblioteca");
+                        _modalMensagem.text(response.dados);
+                        _modal.modal('show');
+                    }
+                    DesbloquearTela();
+                })
+                .fail(function (response) {
+                    _modalTitulo.text("Erro - Biblioteca");
+                    _modalMensagem.text(response.responseText);
+                    _modal.modal('show');
+                    DesbloquearTela();
+                });
+        }
+
+
+        function IrParaEditarIdioma(e) {
+            e.preventDefault;
+            var nome = $(this).closest('tr').find('td.celulaCodigoIdioma').text();
+            window.location.href = "Editar.html?codIdioma=" + nome;
+        }
+
+
+
+    </script>
+</body>
+</html>

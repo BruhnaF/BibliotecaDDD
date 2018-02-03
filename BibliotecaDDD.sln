@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibliotecaDDD.Infra.CrossCu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibliotecaDDD.Infra.CrossCutting.IoC", "app\BibliotecaDDD.Infra.CrossCutting.IoC\BibliotecaDDD.Infra.CrossCutting.IoC.csproj", "{BBD5A917-B0FB-4B49-82DD-62CE679474F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibliotecaDDD.Presentation.WebApi", "app\BibliotecaDDD.Presentation.WebApi\BibliotecaDDD.Presentation.WebApi.csproj", "{205B6271-C2EE-42EC-B15C-05F5CFC647C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{BBD5A917-B0FB-4B49-82DD-62CE679474F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBD5A917-B0FB-4B49-82DD-62CE679474F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBD5A917-B0FB-4B49-82DD-62CE679474F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{205B6271-C2EE-42EC-B15C-05F5CFC647C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{205B6271-C2EE-42EC-B15C-05F5CFC647C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{205B6271-C2EE-42EC-B15C-05F5CFC647C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{205B6271-C2EE-42EC-B15C-05F5CFC647C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{195894BA-E3BB-4332-9D81-A518C19F3952} = {900BF3E1-94F2-49C8-A91F-917CB316CED2}
 		{879B008A-B785-438F-9877-54014C1510AC} = {ABECEBEC-81EF-48DA-ACFE-DED6D277E8D9}
 		{BBD5A917-B0FB-4B49-82DD-62CE679474F2} = {ABECEBEC-81EF-48DA-ACFE-DED6D277E8D9}
+		{205B6271-C2EE-42EC-B15C-05F5CFC647C0} = {96E35027-1795-4444-86B6-22B237C7954F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DE849D31-9FC1-49FE-AF59-2EC872F50F88}
