@@ -33,7 +33,10 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FilmeApp.cs" />
+    <Compile Include="GeneroApp.cs" />
     <Compile Include="IdiomaApp.cs" />
+    <Compile Include="NomedoFilmeApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

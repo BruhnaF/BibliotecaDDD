@@ -33,10 +33,19 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\Application\FilmeAppContrato.cs" />
+    <Compile Include="Contracts\Application\GeneroAppContrato.cs" />
     <Compile Include="Contracts\Application\IdiomaAppContrato.cs" />
+    <Compile Include="Contracts\Application\NomedoFilmeAppContrato.cs" />
+    <Compile Include="Contracts\Repository\FilmeRepositoryContract.cs" />
+    <Compile Include="Contracts\Repository\GeneroRepositoryContract.cs" />
     <Compile Include="Contracts\Repository\IdiomaRepositoryContract.cs" />
+    <Compile Include="Contracts\Repository\NomedoFilmeRepositoryContract.cs" />
     <Compile Include="Contracts\Repository\RepositoryBaseContract.cs" />
+    <Compile Include="Entities\Filme.cs" />
+    <Compile Include="Entities\Genero.cs" />
     <Compile Include="Entities\Idioma.cs" />
+    <Compile Include="Entities\NomedoFilme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

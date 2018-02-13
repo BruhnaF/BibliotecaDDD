@@ -11,62 +11,60 @@ using System.Web.Http;
 namespace BibliotecaDDD.Presentation.WebApi.Controllers
 {
     /// <summary>
-    /// ApiController para Idioma.
+    /// ApiController para o Genero.
     /// </summary>
-    public class IdiomaWebController : ApiController
+    public class GeneroWebController : ApiController
     {
         /// <summary>
-        /// Armazena Instancia do IdiomaApp.
+        /// Variavel que recebe GeneroAppContrato.
         /// </summary>
-        private readonly IdiomaAppContrato _idiomaApp;
+        private readonly GeneroAppContrato _generoApp;
 
         /// <summary>
-        /// Construtor Padrão.
+        /// Construtor recebe GeneroAppContrato
         /// </summary>
-        /// <param name="idiomaApp">Instancia do idiomaApp.</param>
-        public IdiomaWebController(IdiomaAppContrato idiomaApp)
+        /// <param name="generoApp"></param>
+        public GeneroWebController(GeneroAppContrato generoApp)
         {
-            _idiomaApp = idiomaApp;
+            _generoApp = generoApp;
         }
 
         /// <summary>
-        /// Busca Todos os Idiomas Cadastrados.
+        /// Buscar Todos os Generos.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         public HttpResponseMessage Get()
-        {            
+        {
             try
             {
-                var listaIdiomaSalvo = this._idiomaApp.BuscarTodos();
-                var listaIdiomaView = listaIdiomaSalvo.Select(x => new IdiomaViewModel(x));
-
-                var retorno = new { sucesso = true, dados = listaIdiomaView };
+                var listaGeneroSalvo = this._generoApp.BuscarTodos();
+                var listaGeneroView = listaGeneroSalvo.Select(x => new GeneroViewModel(x));
+                var retorno = new { sucesso = true, dados = listaGeneroView };
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 { Content = new JsonContent(retorno) };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError)
                 { Content = new StringContent("Ocorreu um Erro ao Executar a Ação. " +
-                "Tente Novamente ou entre em contato com o Administrador.")};
-            }
+                "Tente Novamente ou entre em contato com o Administrador.") };
+            }            
         }
 
         /// <summary>
-        /// Buscar idioma por Id.
+        /// Buscar Genero por Id.
         /// </summary>
         /// <param name="id">Id a ser Encontrado.</param>
         /// <returns></returns>
         [HttpGet]
-        public HttpResponseMessage Get(string id)
+        public HttpResponseMessage Get(int id)
         {
             try
             {
-                var IdiomaSalvo = this._idiomaApp.BuscarporId(id);
-                var IdiomaView =  new IdiomaViewModel(IdiomaSalvo);
-
-                var retorno = new { sucesso = true, dados = IdiomaView};
+                var generoSalvo = this._generoApp.BuscarporId(id);
+                var generoView = new GeneroViewModel(generoSalvo);
+                var retorno = new { sucesso = true, dados = generoView };
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 { Content = new JsonContent(retorno) };
             }
@@ -75,53 +73,52 @@ namespace BibliotecaDDD.Presentation.WebApi.Controllers
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError)
                 {
                     Content = new StringContent("Ocorreu um Erro ao Executar a Ação. " +
-                                "Tente Novamente ou entre em contato com o Administrador.")
+                "Tente Novamente ou entre em contato com o Administrador.")
                 };
             }
         }
 
         /// <summary>
-        /// Salvar Idioma.
+        /// Salvar Genero.
         /// </summary>
-        /// <param name="idiomaView">Idioma a ser Salvo.</param>
+        /// <param name="generoView">Genero a ser Salvo.</param>
         /// <returns></returns>
         [HttpPost]
-        public HttpResponseMessage Post(IdiomaViewModel idiomaView)
+        public HttpResponseMessage Post(GeneroViewModel generoView)
         {
             try
             {
-                var novoIdioma = new Idioma(idiomaView.IdiomaId, idiomaView.Nome);
-                this._idiomaApp.Salvar(novoIdioma);
+                var novoGenero = new Genero(generoView.GeneroId, generoView.Nome);
+                this._generoApp.Salvar(novoGenero);
 
-                var retorno = new { sucesso = true, dados = "Idioma Cadastrado com Sucesso" };
+                var retorno = new { sucesso = true, dados = "Genero Cadastrado com Sucesso" };
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 { Content = new JsonContent(retorno) };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError)
                 {
                     Content = new StringContent("Ocorreu um Erro ao Executar a Ação. " +
                                 "Tente Novamente ou entre em contato com o Administrador.")
                 };
-            }
-           
+            }           
         }
 
         /// <summary>
-        /// Alterar Idioma.
+        /// Alterar Generos.
         /// </summary>
-        /// <param name="idiomaView">Idioma a ser Alterado.</param>
+        /// <param name="generoView">Genero a ser Alterado.</param>
         /// <returns></returns>
         [HttpPut]
-        public HttpResponseMessage Put( [FromBody]IdiomaViewModel idiomaView)
+        public HttpResponseMessage Put([FromBody] GeneroViewModel generoView)
         {
             try
             {
-                Idioma novoIdioma = idiomaView.ToModel();
-                this._idiomaApp.Alterar(novoIdioma);
+                Genero novoGenero = generoView.ToModel();
+                this._generoApp.Alterar(novoGenero);
 
-                var retorno = new { sucesso = true, dados = "Idioma Alterado com Sucesso" };
+                var retorno = new { sucesso = true, dados = "Genero Alterado com Sucesso" };
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 { Content = new JsonContent(retorno) };
             }
@@ -132,23 +129,22 @@ namespace BibliotecaDDD.Presentation.WebApi.Controllers
                     Content = new StringContent("Ocorreu um Erro ao Executar a Ação. " +
                                 "Tente Novamente ou entre em contato com o Administrador.")
                 };
-            }
-            
+            }            
         }
 
         /// <summary>
-        /// Excluir Idioma.
+        /// Excluir Genero.
         /// </summary>
-        /// <param name="id">Idioma a ser Salvo.</param>
+        /// <param name="id">Genero a ser Excluido.</param>
         /// <returns></returns>
         [HttpDelete]
-        public HttpResponseMessage Delete(string id)
+        public HttpResponseMessage Delete(int id)
         {
             try
-            {               
-                this._idiomaApp.Excluir(id);
+            {
+                this._generoApp.Excluir(id);
 
-                var retorno = new { sucesso = true, dados = "Idioma Excluido com Sucesso" };
+                var retorno = new { sucesso = true, dados = "Genero Excluido com Sucesso" };
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 { Content = new JsonContent(retorno) };
             }
@@ -160,7 +156,6 @@ namespace BibliotecaDDD.Presentation.WebApi.Controllers
                                 "Tente Novamente ou entre em contato com o Administrador.")
                 };
             }
-            
         }
     }
 }

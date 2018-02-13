@@ -1,15 +1,25 @@
-﻿namespace BibliotecaDDD.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace BibliotecaDDD.Domain.Entities
 {
     /// <summary>
     /// Classe que representa o Idioma.
     /// </summary>
     public class Idioma
     {
+        /// <summary>
+        /// Construtor Padrão.
+        /// </summary>
         public Idioma()
         {
 
         }
 
+        /// <summary>
+        /// Construtor Recebendo idiomaId e nome
+        /// </summary>
+        /// <param name="idiomaId"></param>
+        /// <param name="nome"></param>
         public Idioma(string idiomaId, string nome)
         {
             this.IdiomaId = idiomaId;
@@ -45,5 +55,19 @@
         /// Constante que recebe o valor maximo aceitavel para o nome do Idioma. 
         /// </summary>
         public const int tamanhoMaximoNome = 40;
+
+        /// <summary>
+        /// Lista de Filmes.       
+        /// </summary>
+        public List<Filme> Filmes { get; set; }
+
+    //    public List<NomedoFilme> IdiomasdosNomes { get; set; }
+
+        public void AdicionarFilmes(Filme filme)
+        {
+            if (Filmes == null)
+                Filmes = new List<Filme>();
+            Filmes.Add(filme);
+        }
     }
 }

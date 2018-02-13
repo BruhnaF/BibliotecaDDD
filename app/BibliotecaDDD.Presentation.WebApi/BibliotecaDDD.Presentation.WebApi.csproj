@@ -95,6 +95,9 @@
     <Content Include="img\excluir.jpg" />
     <Content Include="src\css\base\bootstrap.min.css" />
     <Content Include="src\css\base\fontawesome.css" />
+    <Content Include="src\pages\genero\Cadastrar.html" />
+    <Content Include="src\pages\genero\Editar.html" />
+    <Content Include="src\pages\genero\Index.html" />
     <Content Include="src\pages\idioma\Cadastrar.html" />
     <Content Include="src\pages\idioma\Editar.html" />
     <Content Include="src\pages\idioma\Index.html" />
@@ -110,12 +113,14 @@
   <ItemGroup>
     <Compile Include="App_Start\SimpleInjectorConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\GeneroWebController.cs" />
     <Compile Include="Controllers\IdiomaWebController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\JsonContent.cs" />
+    <Compile Include="ViewModels\GeneroViewModel.cs" />
     <Compile Include="ViewModels\IdiomaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

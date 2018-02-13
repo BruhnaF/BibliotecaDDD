@@ -17,9 +17,8 @@ namespace BibliotecaDDD.Aplication
         private readonly IdiomaRepositoryContract _idiomaRepository;
 
         /// <summary>
-        /// Construtor que recebe o IdiomaServiceContrato, IdiomaRepositoryContract.
-        /// </summary>
-        /// <param name="idiomaService"></param>
+        /// Construtor que recebe o IdiomaRepositoryContract.
+        /// </summary>       
         /// <param name="idiomaRepository"></param>
         public IdiomaApp(IdiomaRepositoryContract idiomaRepository)
         {

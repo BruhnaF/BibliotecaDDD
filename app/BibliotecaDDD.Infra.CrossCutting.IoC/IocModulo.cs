@@ -19,8 +19,14 @@ namespace BibliotecaDDD.Infra.CrossCutting.IoC
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
             container.Register<IdiomaAppContrato, IdiomaApp>(lifestyletype);
+            container.Register<GeneroAppContrato, GeneroApp>(lifestyletype);
+            container.Register<FilmeAppContrato, FilmeApp>(lifestyletype);
+            container.Register<NomedoFilmeAppContrato, NomedoFilmeApp>(lifestyletype);
 
             container.Register<IdiomaRepositoryContract, IdiomaRepository>(lifestyletype);
+            container.Register<GeneroRepositoryContract, GeneroRepository>(lifestyletype);
+            container.Register<FilmeRepositoryContract, FilmeRepository>(lifestyletype);
+            container.Register<NomedoFilmeRepositoryContract, NomedoFilmeRepository>(lifestyletype);
 
             container.Register(typeof(RepositoryBaseContract<>), typeof (RepositoryBase<>), lifestyletype);
             container.Register<BibliotecaDDDContext>(lifestyletype);

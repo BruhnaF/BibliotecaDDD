@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Alterar Idioma - Biblioteca</title>
+    <title>Alterar Genero - Biblioteca</title>
     <link href="../../css/base/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
@@ -15,7 +15,7 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Idioma
+                            Genero
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -34,7 +34,7 @@
 
         <ol class="breadcrumb">
             <li><a href="../Index.html">Home</a></li>
-            <li><a href="Index.html">Idioma</a></li>
+            <li><a href="Index.html">Genero</a></li>
             <li class="active">Alterar</li>
         </ol>
         <div class="container-fluid">
@@ -44,9 +44,9 @@
             <form>
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="txtIdiomaId">Código do Idioma</label>
-                        <input type="text" class="form-control" id="txtIdiomaId" placeholder="Código do Idioma" disabled />
-                        <input type="hidden" id="hiddenIdiomaId" name="hiddenIdiomaId" class="hiddenField" />
+                        <label for="txtGeneroId">Código do Genero</label>
+                        <input type="text" class="form-control" id="txtGeneroId" placeholder="Código do Genero" disabled />
+                        <input type="hidden" id="hiddenGenero" name="hiddenGenero" class="hiddenField" />
                     </div>
                     <div class="form-group col-md-4">
                         <label for="txtNome">Nome</label>
@@ -87,20 +87,22 @@
     <script src="../../scripts/base/bootstrap.min.js"></script>
 
     <script>
+        var _txtGeneroId = $("#txtGeneroId");
+        var _txtNome = $("#txtNome");
+        var _hiddenGenero = $("#hiddenGenero");
+        var _hiddenNome = $("#hiddenNome");
+
         var _botaoCancelar = $("#btnCancelar");
         var _botaoLimpar = $("#btnLimpar");
         var _botaoSalvar = $("#btnSalvar");
-        var _txtIdiomaId = $("#txtIdiomaId");
-        var _txtNome = $("#txtNome");
-        var _hiddenIdiomaId = $("#hiddenIdiomaId");
-        var _hiddenNome = $("#hiddenNome");
 
+        var _modalResultado = $("#modalResultado");
         var _modalTitulo = $("#modalResultadoTitle");
         var _modalMensagem = $("#modalResultadoMessagem");
-        var _modal = $("#modalResultado");
-        var _codigoIdioma = "";
 
-        var urlApi = "http://localhost:50617/api/IdiomaWeb";
+        var _codigoGenero = "";
+
+        var urlApi = "http://localhost:50617/api/GeneroWeb";
 
         _botaoCancelar.on("click", CancelarEdicao);
         _botaoLimpar.on("click", LimparCampos);
@@ -112,50 +114,49 @@
             window.location.href = "Index.html";
         }
 
-        function LimparCampos() {           
+        function LimparCampos() {
             _txtNome.val('');
         }
 
         function AlterarDados() {
             var dados = PegarDadosdoForm();
-
             $.ajax({
                 url: urlApi,
                 type: "PUT",
                 cache: false,
                 data: JSON.stringify(dados),
                 contentType: "application/json; charset=utf-8",
-                dataType: "json"
+                dataType: "json",
             })
                 .done(function (response) {
                     var titulo = "";
 
                     if (response.sucesso) {
-
                         titulo = "Sucesso";
                         LimparCampos();
-                    } else {
+                    }
+                    else {
                         titulo = "Aviso";
                     }
-
-                    _modalTitulo.text(titulo + " - Biblioteca");
+                    _modalTitulo.text(titulo + "- Biblioteca");
                     _modalMensagem.text(response.dados);
-                    _modal.modal('show');
+                    _modalResultado.modal('show');
                 })
                 .fail(function (response) {
                     _modalTitulo.text("Erro - Biblioteca");
                     _modalMensagem.text(response.responseText);
-                    _modal.modal('show');
+                    _modalResultado.modal('show');
                 });
         }
 
         function InicializarPagina() {
-            _codigoIdioma = PegarDadosUrl("codIdioma");
-            PreencherForm(_codigoIdioma);
+            _codigoGenero = PegarDadosUrl("codGenero");
+            PreencherForm(_codigoGenero);
         }
 
+
         function PegarDadosdoForm() {
-            var dados = { "IdiomaId": _txtIdiomaId.val(), "Nome": _txtNome.val() };
+            var dados = { "GeneroId": _txtGeneroId.val(), "Nome": _txtNome.val() };
             return dados;
         }
 
@@ -165,24 +166,24 @@
             return k ? p[k] : p;
         }
 
-        function PreencherForm(codigoIdioma) {
+        function PreencherForm(codigoGenero) {
             $.ajax({
-                url: urlApi + "/" + codigoIdioma,
+                url: urlApi + "/" + codigoGenero,
                 type: "GET",
                 cache: false,
                 data: {},
                 contentType: "application/json; charset=utf-8",
-                dataType: "json"
+                dataType: "json",
             })
                 .done(function (response) {
                     var dados = response.dados;
-                    _txtIdiomaId.val(dados.IdiomaId);
+                    _txtGeneroId.val(dados.GeneroId);
                     _txtNome.val(dados.Nome);
                 })
                 .fail(function (response) {
                     _modalTitulo.text("Erro - Biblioteca");
                     _modalMensagem.text(response.responseText);
-                    _modal.modal('show');
+                    _modalResultado.modal('show');
                 });
         }
 

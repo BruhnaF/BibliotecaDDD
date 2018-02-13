@@ -2,8 +2,9 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Alterar Idioma - Biblioteca</title>
+    <title>Cadastrar Genero - Biblioteca</title>
     <link href="../../css/base/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../css/base/fontawesome-all.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
@@ -15,7 +16,7 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Idioma
+                            Genero
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -34,24 +35,18 @@
 
         <ol class="breadcrumb">
             <li><a href="../Index.html">Home</a></li>
-            <li><a href="Index.html">Idioma</a></li>
-            <li class="active">Alterar</li>
+            <li><a href="Index.html">Genero</a></li>
+            <li class="active">Cadastrar</li>
         </ol>
         <div class="container-fluid">
             <div class="row">
-                <h2>Editar</h2>
+                <h2>Cadastrar</h2>
             </div>
             <form>
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <label for="txtIdiomaId">Código do Idioma</label>
-                        <input type="text" class="form-control" id="txtIdiomaId" placeholder="Código do Idioma" disabled />
-                        <input type="hidden" id="hiddenIdiomaId" name="hiddenIdiomaId" class="hiddenField" />
-                    </div>
+                <div class="row">                    
                     <div class="form-group col-md-4">
                         <label for="txtNome">Nome</label>
                         <input type="text" class="form-control" id="txtNome" placeholder="Nome" />
-                        <input type="hidden" id="hiddenNome" name="hiddenNome" class="hiddenField" />
                     </div>
                 </div>
                 <div class="row">
@@ -88,40 +83,33 @@
 
     <script>
         var _botaoCancelar = $("#btnCancelar");
-        var _botaoLimpar = $("#btnLimpar");
         var _botaoSalvar = $("#btnSalvar");
-        var _txtIdiomaId = $("#txtIdiomaId");
+        var _botaoLimpar = $("#btnLimpar");       
         var _txtNome = $("#txtNome");
-        var _hiddenIdiomaId = $("#hiddenIdiomaId");
-        var _hiddenNome = $("#hiddenNome");
 
+        var _modalResultado = $("#modalResultado");
         var _modalTitulo = $("#modalResultadoTitle");
         var _modalMensagem = $("#modalResultadoMessagem");
-        var _modal = $("#modalResultado");
-        var _codigoIdioma = "";
 
-        var urlApi = "http://localhost:50617/api/IdiomaWeb";
+        var urlApi = "http://localhost:50617/api/GeneroWeb";
 
-        _botaoCancelar.on("click", CancelarEdicao);
+        _botaoCancelar.on("click", CancelarCadastro);
         _botaoLimpar.on("click", LimparCampos);
-        _botaoSalvar.on("click", AlterarDados);
+        _botaoSalvar.on("click", SalvarDados);
 
-        $(document).ready(InicializarPagina);
-
-        function CancelarEdicao() {
-            window.location.href = "Index.html";
+        function CancelarCadastro() {
+            window.location.href = "../Index.html";
         }
 
-        function LimparCampos() {           
+        function LimparCampos() {            
             _txtNome.val('');
         }
 
-        function AlterarDados() {
-            var dados = PegarDadosdoForm();
-
+        function SalvarDados() {
+            var dados = PegarDadosForm();
             $.ajax({
                 url: urlApi,
-                type: "PUT",
+                type: "POST",
                 cache: false,
                 data: JSON.stringify(dados),
                 contentType: "application/json; charset=utf-8",
@@ -129,61 +117,28 @@
             })
                 .done(function (response) {
                     var titulo = "";
-
                     if (response.sucesso) {
-
-                        titulo = "Sucesso";
+                        titulo = "Suceso";
                         LimparCampos();
-                    } else {
+                    }
+                    else {
                         titulo = "Aviso";
                     }
 
                     _modalTitulo.text(titulo + " - Biblioteca");
                     _modalMensagem.text(response.dados);
-                    _modal.modal('show');
+                    _modalResultado.modal('show');
                 })
                 .fail(function (response) {
                     _modalTitulo.text("Erro - Biblioteca");
                     _modalMensagem.text(response.responseText);
-                    _modal.modal('show');
+                    _modalResultado.modal('show');
                 });
         }
 
-        function InicializarPagina() {
-            _codigoIdioma = PegarDadosUrl("codIdioma");
-            PreencherForm(_codigoIdioma);
-        }
-
-        function PegarDadosdoForm() {
-            var dados = { "IdiomaId": _txtIdiomaId.val(), "Nome": _txtNome.val() };
+        function PegarDadosForm() {
+            var dados = { "Nome": _txtNome.val() };
             return dados;
-        }
-
-        function PegarDadosUrl(k) {
-            var p = {};
-            location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (s, k, v) { p[k] = v })
-            return k ? p[k] : p;
-        }
-
-        function PreencherForm(codigoIdioma) {
-            $.ajax({
-                url: urlApi + "/" + codigoIdioma,
-                type: "GET",
-                cache: false,
-                data: {},
-                contentType: "application/json; charset=utf-8",
-                dataType: "json"
-            })
-                .done(function (response) {
-                    var dados = response.dados;
-                    _txtIdiomaId.val(dados.IdiomaId);
-                    _txtNome.val(dados.Nome);
-                })
-                .fail(function (response) {
-                    _modalTitulo.text("Erro - Biblioteca");
-                    _modalMensagem.text(response.responseText);
-                    _modal.modal('show');
-                });
         }
 
     </script>
