@@ -1,5 +1,6 @@
 ﻿using BibliotecaDDD.Domain.Contracts.Application;
 using BibliotecaDDD.Domain.Entities;
+using BibliotecaDDD.Domain.ValueObject;
 using BibliotecaDDD.Presentation.WebApi.Utils;
 using BibliotecaDDD.Presentation.WebApi.ViewModels;
 using System;
@@ -147,6 +148,13 @@ namespace BibliotecaDDD.Presentation.WebApi.Controllers
                 var retorno = new { sucesso = true, dados = "Genero Excluido com Sucesso" };
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 { Content = new JsonContent(retorno) };
+            }
+            catch (BibliotecaException ex)
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent(ex.Message)
+                };
             }
             catch (Exception)
             {

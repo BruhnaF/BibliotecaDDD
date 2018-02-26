@@ -1,6 +1,7 @@
 ﻿using BibliotecaDDD.Domain.Contracts.Application;
 using BibliotecaDDD.Domain.Contracts.Repository;
 using BibliotecaDDD.Domain.Entities;
+using BibliotecaDDD.Domain.ValueObject;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -60,6 +61,10 @@ namespace BibliotecaDDD.Aplication
         /// <param name="id">Id a ser excluido.</param>
         public void Excluir(string id)
         {
+            var idioma = _idiomaRepository.BuscaFilmeeNomedoFilmeporIdiomae(id);
+            if (idioma.Filmes.Count > 0 || idioma.IdiomasdosNomes.Count > 0)
+                throw new BibliotecaException("Não é possivel deletar um Idioma, " +
+                    "que esta sendo usado em outro registro e nao pode ser excluido.");
             this._idiomaRepository.Delete(new object[] { id });
             this._idiomaRepository.SaveChanges();
         }

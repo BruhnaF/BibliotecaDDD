@@ -3,8 +3,14 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace BibliotecaDDD.Infra.Data.Entity.EntityMap
 {
+    /// <summary>
+    /// Representa o GeneroMap
+    /// </summary>
     public class GeneroMap : EntityTypeConfiguration<Genero>
     {
+        /// <summary>
+        /// Construtor Padrão.
+        /// </summary>
         public GeneroMap()
         {
             HasKey(g => g.GeneroId);

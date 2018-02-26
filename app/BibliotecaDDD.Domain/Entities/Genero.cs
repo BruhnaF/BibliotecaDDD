@@ -41,6 +41,10 @@ namespace BibliotecaDDD.Domain.Entities
         /// </summary>
         public List<Filme> Filmes { get; set; }
 
+        /// <summary>
+        /// Adicionar lista de filme em Genero.
+        /// </summary>
+        /// <param name="filme"></param>
         public void AdicionarFilmes(Filme filme)
         {
             if (Filmes == null)

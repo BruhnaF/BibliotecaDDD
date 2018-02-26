@@ -220,6 +220,7 @@
                 .fail(function (response) {
                     _modalTitulo.text("Erro - Biblioteca");
                     _modalMensagem.text(response.responseText);
+                    _modalExcluir.modal("hide");
                     _modal.modal('show');
                 });
         }

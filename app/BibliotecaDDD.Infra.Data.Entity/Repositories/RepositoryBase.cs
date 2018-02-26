@@ -15,7 +15,7 @@ namespace BibliotecaDDD.Infra.Data.Entity.Repositories
     public class RepositoryBase<TEntity> : IDisposable, RepositoryBaseContract<TEntity> where TEntity : class
     {
         private readonly BibliotecaDDDContext _context;
-        private DbSet<TEntity> _dbSet;
+        protected DbSet<TEntity> _dbSet;
 
         /// <summary>
         /// Construtor Padrão, recebendo o contexto.
@@ -76,7 +76,8 @@ namespace BibliotecaDDD.Infra.Data.Entity.Repositories
             if(filter != null)
             {
                 query = query.Where(filter);
-            }
+            }           
+
             return query;
         }
 

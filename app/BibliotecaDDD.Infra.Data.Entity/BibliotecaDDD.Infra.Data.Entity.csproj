@@ -57,6 +57,14 @@
     <Compile Include="Migrations\201802131323333_FilmeCreate.Designer.cs">
       <DependentUpon>201802131323333_FilmeCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802131336166_NomedoFilmeCreate.cs" />
+    <Compile Include="Migrations\201802131336166_NomedoFilmeCreate.Designer.cs">
+      <DependentUpon>201802131336166_NomedoFilmeCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802241641050_NomedoFilmeeIdiomadoNome.cs" />
+    <Compile Include="Migrations\201802241641050_NomedoFilmeeIdiomadoNome.Designer.cs">
+      <DependentUpon>201802241641050_NomedoFilmeeIdiomadoNome.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\FilmeRepository.cs" />
@@ -74,6 +82,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802131323333_FilmeCreate.resx">
       <DependentUpon>201802131323333_FilmeCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802131336166_NomedoFilmeCreate.resx">
+      <DependentUpon>201802131336166_NomedoFilmeCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802241641050_NomedoFilmeeIdiomadoNome.resx">
+      <DependentUpon>201802241641050_NomedoFilmeeIdiomadoNome.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

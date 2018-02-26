@@ -31,7 +31,7 @@ namespace BibliotecaDDD.Infra.Data.Entity.Context
             modelBuilder.Configurations.Add(new IdiomaMap());
             modelBuilder.Configurations.Add(new GeneroMap());
             modelBuilder.Configurations.Add(new FilmeMap());
-         //   modelBuilder.Configurations.Add(new NomedoFilmeMap());
+            modelBuilder.Configurations.Add(new NomedoFilmeMap());
         }
     }
 }

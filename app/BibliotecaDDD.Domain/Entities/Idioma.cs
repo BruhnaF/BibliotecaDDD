@@ -61,13 +61,31 @@ namespace BibliotecaDDD.Domain.Entities
         /// </summary>
         public List<Filme> Filmes { get; set; }
 
-    //    public List<NomedoFilme> IdiomasdosNomes { get; set; }
+        /// <summary>
+        /// Lista de idiomas.
+        /// </summary>
+        public List<NomedoFilme> IdiomasdosNomes { get; set; }
 
+        /// <summary>
+        /// Adicionar lista de filmes em genero.
+        /// </summary>
+        /// <param name="filme"></param>
         public void AdicionarFilmes(Filme filme)
         {
             if (Filmes == null)
                 Filmes = new List<Filme>();
             Filmes.Add(filme);
+        }
+
+        /// <summary>
+        /// Adicionar lista de nomes do filme em genero.
+        /// </summary>
+        /// <param name="idiomadosNomes"></param>
+        public void AdicionarIdiomadosNomes(NomedoFilme idiomadosNomes)
+        {
+            if (IdiomasdosNomes == null)
+                IdiomasdosNomes = new List<NomedoFilme>();
+            IdiomasdosNomes.Add(idiomadosNomes);
         }
     }
 }
